@@ -82,8 +82,9 @@ static int internal_dev_open(struct net_device *netdev) {
     } else {
         printk(KERN_INFO "internal_dev_open, dev: %p, vlan_id: %u\n", netdev, priv->vlan_id);
         if (1) {
-printk("Xi - Always UP\r\n");            
-netif_carrier_on(netdev);
+			/* add by lihz - 2018.4.11 */
+			printk("force internal device always up\r\n");            
+			netif_carrier_on(netdev);
         } else {
             netif_carrier_off(netdev);
         }

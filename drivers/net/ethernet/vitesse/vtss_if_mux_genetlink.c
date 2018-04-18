@@ -1759,7 +1759,7 @@ int vtss_if_mux_genetlink_init(void)
 	    rcu_assign_pointer(if_mux_port_conf[i], p);
 	}
 
-	for(i=0; i < 4096; i++)
+	for(i = 0; i < 4096; i++)
 	{
 	    vtss_if_mux_vlan_up[i] = 1;
 	}

@@ -46,8 +46,9 @@ EXPORT_SYMBOL_GPL(init_uts_ns);
 const char linux_banner[] =
 	"Linux version " UTS_RELEASE " (" LINUX_COMPILE_BY "@"
 	LINUX_COMPILE_HOST ") (" LINUX_COMPILER ") " UTS_VERSION "\n";
-
+/* add LINUX_MY_VERSION changed by lihz - 2018.4.18 */
 const char linux_proc_banner[] =
 	"%s version %s"
+	" (" LINUX_MY_VER ")"
 	" (" LINUX_COMPILE_BY "@" LINUX_COMPILE_HOST ")"
 	" (" LINUX_COMPILER ") %s\n";

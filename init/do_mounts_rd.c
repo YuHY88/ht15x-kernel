@@ -92,6 +92,10 @@ identify_ramdisk_image(int fd, int start_block, decompress_fn *decompressor)
 	sys_lseek(fd, start_block * BLOCK_SIZE, 0);
 	sys_read(fd, buf, size);
 
+	/* add debug information by lihz - 2018.4.18 */
+	printk(KERN_NOTICE "Read block: 0x%x 0x%x 0x%x 0x%x 0x%x 0x%x 0x%x 0x%x\n",
+				   buf[0], buf[2], buf[3], buf[4], buf[5], buf[6], buf[7]);
+
 	*decompressor = decompress_method(buf, size, &compress_name);
 	if (compress_name) {
 		printk(KERN_NOTICE "RAMDISK: %s image found at block %d\n",

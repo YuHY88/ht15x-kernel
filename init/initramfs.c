@@ -629,8 +629,9 @@ static int __init populate_rootfs(void)
 		fd = sys_open("/initrd.image",
 			      O_WRONLY|O_CREAT, 0700);
 		if (fd >= 0) {
-			ssize_t written = xwrite(fd, (char *)initrd_start,
-						initrd_end - initrd_start);
+			/* to support ext3 filesystem, change by lihz - 2018.4.18 */
+			ssize_t written = xwrite(fd, (char *)initrd_start + 0x40,
+						initrd_end - initrd_start - 0x40);
 
 			if (written != initrd_end - initrd_start)
 				pr_err("/initrd.image: incomplete write (%zd != %ld)\n",

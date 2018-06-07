@@ -35,6 +35,8 @@ static int cs2gpio[] = {
 #elif defined(CONFIG_VTSS_VCOREIII_OCELOT)
         // Only 4 CS, dummy entries
         -1, -1, -1, -1,
+#elif defined(CONFIG_VTSS_VCOREIII_SERVALT) // HT15x nand CS is nCS1, GPIO8, add by lihz, 2018.6.6
+		8,                             
 #else
 #error Device not supported with this wriver
 #endif
@@ -65,6 +67,7 @@ void dw_spi_vcoreiii_set_cs(struct dw_spi *dws, struct spi_device *spi, bool ena
         // If the CS is already configured as a GPIO the SPI framework will have dealt with it
         if (likely(spi->cs_gpio == -ENOENT)) {
                 if (likely(cs < 4)) {
+					#if 0 // HT15x nCS0 as norflash CS
                         /* JR2, Ferret and onwards:
                          *
                          * Use the overriding SPI boot controller since the
@@ -78,6 +81,7 @@ void dw_spi_vcoreiii_set_cs(struct dw_spi *dws, struct spi_device *spi, bool ena
                         else
                                 sw_mode = VTSS_F_ICPU_CFG_SPI_MST_SW_MODE_SW_PIN_CTRL_MODE(1);
                         writel(sw_mode, VTSS_ICPU_CFG_SPI_MST_SW_MODE);
+					#endif
                 } else {  // For the CS >= 4, drive as a standard GPIO
                         int gpio = cs2gpio[cs];
                         if (gpio >= 0) {

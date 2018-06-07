@@ -1850,7 +1850,7 @@ static struct net_device *vc3fdma_create(void)
 
     // Set arbitrarily high for direct injection (not rx)
     dev->mtu = IF_BUFSIZE_JUMBO;
-    priv->rx_cfg.mtu = RX_MTU_DEFAULT;
+    priv->rx_cfg.mtu = IF_BUFSIZE_JUMBO;//RX_MTU_DEFAULT;
 
     // Debug procfs file
 #if defined(CONFIG_DEBUG_FS)

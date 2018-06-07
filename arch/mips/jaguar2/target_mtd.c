@@ -81,7 +81,7 @@ static struct flash_platform_data jaguar2_spinand_flash_data = {
     .nr_parts = ARRAY_SIZE(vcoreiii_partition_info),
 };
 #if defined(CONFIG_VTSS_VCOREIII_SERVALT)
-#define SPINAND_CS   1
+#define SPINAND_CS   4   // SPI controller used SIMC(spi-dw), changed by lihz - 2018.6.6
 #define SPINAND_GPIO 8
 #else    // Serval2
 #define SPINAND_CS   3

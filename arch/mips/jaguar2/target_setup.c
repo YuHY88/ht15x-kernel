@@ -38,6 +38,8 @@
 #include <asm/reboot.h>
 
 #include <asm/mach-jaguar2/hardware.h>
+#include <asm/vcoreiii-gpio.h>
+
 
 /* No other usable initialization hook than this ...  */
 extern void (*late_time_init)(void);
@@ -169,9 +171,34 @@ static void cpu_reset(void)
 	printk(KERN_ERR "WTF\n");	/* Not reached */
 }
 
+
+/* reboot by watch dog, add by lihz - 2018.5.25 */
+#define DW_EN  14
+#define DW_IN  15
+
+static void vcoreiii_reboot_by_wtd(void)
+{
+	printk("reset system by watch dog \n");	/* output reset information */
+
+	/* set gpio mode as gpio */
+	vcoreiii_gpio_set_mode(DW_EN, 0);
+	vcoreiii_gpio_set_mode(DW_IN, 0);
+
+	/* enable watch dog */
+	vcoreiii_gpio_direction_output(DW_EN, 0);
+
+	/* not to feed dog */
+	vcoreiii_gpio_direction_input(DW_IN);
+	udelay(5000000);
+}
+
+/************  end ************/
 static void vcoreiii_machine_restart(char *command)
 {
-        do_kernel_restart(command);
+	/* reset by watch dog, add by lihz - 2018.5.25 */
+	vcoreiii_reboot_by_wtd();
+
+    do_kernel_restart(command);
 
 #if defined(CONFIG_VTSS_VCOREIII_SERVALT)
 	// Selected registers of Serval-T's 5G PLL need to have their
@@ -182,6 +209,8 @@ static void vcoreiii_machine_restart(char *command)
 	writel(0x000014ce, VTSS_HSIO_PLL5G_CFG_PLL5G_CFG6(0));
 	writel(0x00000000, VTSS_HSIO_HW_CFGSTAT_CLK_CFG);
 #endif
+
+
 
 	cpu_reset();
 

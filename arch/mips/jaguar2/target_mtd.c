@@ -105,7 +105,7 @@ static struct spi_board_info jaguar2_spi_board_info[] __initdata = {
 	{
 		/* the modalias must be the same as spi device driver name */
 		.modalias = "mt29f", /* Name of spi_driver for this device */
-		.max_speed_hz = 15625000,     /* max spi clock (SCK) speed in HZ */
+		.max_speed_hz = 31250000, //46875000,     /* max spi clock (SCK) speed in HZ */
 		.bus_num = 0, /* Framework bus number */
 		.chip_select = SPINAND_CS, /* Framework chip select. */
 		.platform_data = &jaguar2_spinand_flash_data,

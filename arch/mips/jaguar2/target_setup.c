@@ -189,7 +189,7 @@ static void vcoreiii_reboot_by_wtd(void)
 
 	/* not to feed dog */
 	vcoreiii_gpio_direction_input(DW_IN);
-	udelay(5000000);
+	//udelay(5000000);
 }
 
 /************  end ************/
@@ -197,7 +197,9 @@ static void vcoreiii_machine_restart(char *command)
 {
 	/* reset by watch dog, add by lihz - 2018.5.25 */
 	vcoreiii_reboot_by_wtd();
-
+	while (1)
+			cpu_wait();
+	/* ################## end #################### */
     do_kernel_restart(command);
 
 #if defined(CONFIG_VTSS_VCOREIII_SERVALT)
@@ -209,8 +211,6 @@ static void vcoreiii_machine_restart(char *command)
 	writel(0x000014ce, VTSS_HSIO_PLL5G_CFG_PLL5G_CFG6(0));
 	writel(0x00000000, VTSS_HSIO_HW_CFGSTAT_CLK_CFG);
 #endif
-
-
 
 	cpu_reset();
 

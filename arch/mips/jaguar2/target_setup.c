@@ -197,8 +197,6 @@ static void vcoreiii_machine_restart(char *command)
 {
 	/* reset by watch dog, add by lihz - 2018.5.25 */
 	vcoreiii_reboot_by_wtd();
-	while (1)
-			cpu_wait();
 	/* ################## end #################### */
     do_kernel_restart(command);
 

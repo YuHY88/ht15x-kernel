@@ -4486,7 +4486,7 @@ static int nand_set_ecc_soft_ops(struct mtd_info *mtd)
 		if (!ecc->size)
 			ecc->size = 256;
 		ecc->bytes = 3;
-		ecc->strength = 1;
+		ecc->strength = 2;
 		return 0;
 	case NAND_ECC_BCH:
 		if (!mtd_nand_has_bch()) {

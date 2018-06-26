@@ -197,6 +197,9 @@ static void vcoreiii_machine_restart(char *command)
 {
 	/* reset by watch dog, add by lihz - 2018.5.25 */
 	vcoreiii_reboot_by_wtd();
+	/* reset switch core when reset cpu, add by lihz - 2018.6.26 */
+	writel(0x0, VTSS_ICPU_CFG_CPU_SYSTEM_CTRL_RESET);
+	writel(0x3, VTSS_DEVCPU_GCB_CHIP_REGS_SOFT_RST);
 	/* ################## end #################### */
     do_kernel_restart(command);
 

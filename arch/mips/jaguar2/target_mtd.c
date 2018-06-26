@@ -41,7 +41,7 @@
 #include <asm/mach-jaguar2/hardware.h>
 #include <asm/vcoreiii-gpio.h>
 
-#if defined(CONFIG_VTSS_VCOREIII_JAGUAR2_ARCH) && !defined(CONFIG_MTD_SPINAND_MT29F)
+#if defined(CONFIG_VTSS_VCOREIII_JAGUAR2_ARCH) && !defined(CONFIG_MTD_NAND_SPINAND_MX35)
 #define JR2_PI_NAND 1
 #endif
 
@@ -61,7 +61,6 @@ static struct platform_device jaguar2_spi = {
 #endif
         .id               = 0,
 };
-#if 0
 
 static struct flash_platform_data jaguar2_spi_flash_data = {
 	.type = "jedec,spi-nor",
@@ -73,8 +72,8 @@ static struct flash_platform_data jaguar2_spi_flash_data = {
 #endif
         .use_4byte_commands = 1,
 };
-#endif
-#if defined(CONFIG_MTD_SPINAND_MT29F)
+
+#if defined(CONFIG_MTD_NAND_SPINAND_MX35)
 
 static struct flash_platform_data jaguar2_spinand_flash_data = {
     .name = "spi_nand",
@@ -92,7 +91,6 @@ static struct flash_platform_data jaguar2_spinand_flash_data = {
 
 
 static struct spi_board_info jaguar2_spi_board_info[] __initdata = {
-#if 0
 	{
 		/* the modalias must be the same as spi device driver name */
 		.modalias = "m25p80", /* Name of spi_driver for this device */
@@ -103,11 +101,10 @@ static struct spi_board_info jaguar2_spi_board_info[] __initdata = {
                 /* .controller_data = &jaguar2_spi_flash_cs,  /\* chip select control  *\/ */
 		.mode = SPI_MODE_0, /* CPOL=0, CPHA=0 */
         },
-#endif
-#if defined(CONFIG_MTD_SPINAND_MT29F)
+#if defined(CONFIG_MTD_NAND_SPINAND_MX35)
 	{
 		/* the modalias must be the same as spi device driver name */
-		.modalias = "mt29f", /* Name of spi_driver for this device */
+		.modalias = "mx35", /* Name of spi_driver for this device */
 		.max_speed_hz = 25000000, //46875000,     /* max spi clock (SCK) speed in HZ */
 		.bus_num = 0, /* Framework bus number */
 		.chip_select = SPINAND_CS, /* Framework chip select. */

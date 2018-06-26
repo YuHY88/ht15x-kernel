@@ -8,7 +8,9 @@ CC=$5
 
 #myver=v001r001 # add first version for HT157/158
 #myver=v001r002 # first release version to test
-myver=v001r003 # change vtss.ifh mtu;spi controller use SIMC, not to used norflash
+#myver=v001r003 # change vtss.ifh mtu;spi controller use SIMC, not to used norflash
+#myver=v001r004 # change nandflash drvier as mx35, 
+myver=v001r005 # modify nandflash ecc strlenth; add reset switch core when reset cpu core;
 
 vecho() { [ "${quiet}" = "silent_" ] || echo "$@" ; }
 

@@ -12,13 +12,13 @@ export CROSS_COMPILE=mipsel-linux-
 #export INSTALL_MOD_PATH="./ccache /usr/bin/gcc"
 #export O=vmlinux.bin
 
-cp config-servalt .config
+cp config-ocelot .config
 
 make vmlinux.bin
 
-cp ./arch/mips/boot/vmlinux.bin ./mscc-linux-servalt.bin
+cp ./arch/mips/boot/vmlinux.bin ./mscc-linux-ocelot.bin
 
-xz --force --check=none --lzma2=preset=6e,dict=64KiB mscc-linux-servalt.bin
+xz --force --check=none --lzma2=preset=6e,dict=64KiB mscc-linux-ocelot.bin
 
 
 #make ARCH=mips CROSS_COMPILE=/opt/mscc/mscc-brsdk-mips-2017.02-017/stage1/x86_64-linux/usr/bin/mipsel-linux-

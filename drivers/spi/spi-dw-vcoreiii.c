@@ -34,7 +34,7 @@ static int cs2gpio[] = {
         33, 49, 50, 51,                 // CS12-15
 #elif defined(CONFIG_VTSS_VCOREIII_OCELOT)
         // Only 4 CS, dummy entries
-        -1, -1, -1, -1,
+        8,
 #elif defined(CONFIG_VTSS_VCOREIII_SERVALT) // HT15x nand CS is nCS1, GPIO8, add by lihz, 2018.6.6
 		8,                             
 #else

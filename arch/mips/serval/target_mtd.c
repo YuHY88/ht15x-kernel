@@ -62,11 +62,11 @@ static struct flash_platform_data serval_spi_flash_data = {
 
 #if defined(CONFIG_MTD_NAND_PLATFORM)
 static struct mtd_partition vcoreiii_partition_info[] = {
-    [0] = {
-        .name	= "rootfs_data",
-        .offset	= 0,
-        .size	= MTDPART_SIZ_FULL,
-    },
+	 [0] = {
+		.name	= "rootfs_data",
+		.offset	= 0,
+		.size	= MTDPART_SIZ_FULL,
+	 },
 };
 
 static struct flash_platform_data serval_spinand_flash_data = {
@@ -89,10 +89,10 @@ static struct spi_board_info serval_spi_board_info[] __initdata = {
 #if defined(CONFIG_MTD_NAND_PLATFORM)
 	{
 		/* the modalias must be the same as spi device driver name */
-		.modalias = "mt29f", /* Name of spi_driver for this device */
+		.modalias = "mx35", /* Name of spi_driver for this device */
 		.max_speed_hz = 15625000,     /* max spi clock (SCK) speed in HZ */
 		.bus_num = 0, /* Framework bus number */
-		.chip_select = 1, /* Framework chip select. */
+		.chip_select = 4, /* Framework chip select. */
 		.platform_data = &serval_spinand_flash_data,
 		.mode = SPI_MODE_0, /* CPOL=0, CPHA=0 */
         },

@@ -38,6 +38,7 @@
 #include <asm/reboot.h>
 
 #include <asm/mach-serval/hardware.h>
+#include <asm/vcoreiii-gpio.h>
 
 /* No other usable initialization hook than this ...  */
 extern void (*late_time_init)(void);
@@ -78,11 +79,42 @@ const char *get_system_type(void)
 	return "Vitesse VCore-III Serval";
 }
 
+
+/* reboot by watch dog, add by lihz - 2018.7.6 */
+#define DW_EN  9
+#define DW_IN  10
+
+static void vcoreiii_reboot_by_wtd(void)
+{
+	printk("reset system by watch dog \n");	/* output reset information */
+
+	/* set gpio mode as gpio */
+	vcoreiii_gpio_set_mode(DW_EN, 0);
+	vcoreiii_gpio_set_mode(DW_IN, 0);
+
+	/* enable watch dog */
+	vcoreiii_gpio_direction_output(DW_EN, 0);
+
+	/* not to feed dog */
+	vcoreiii_gpio_direction_input(DW_IN);
+	//udelay(5000000);
+}
+
+/************  end ************/
+
+
 static void vcoreiii_machine_restart(char *command)
 {
 	u32 val;
+	
+	/* reset by watch dog, add by lihz - 2018.7.6 */
+	vcoreiii_reboot_by_wtd();
+	/* reset switch core when reset cpu, add by lihz - 2018.7.6 */
+	writel(0x0, VTSS_ICPU_CFG_CPU_SYSTEM_CTRL_RESET);
+	writel(0x3, VTSS_DEVCPU_GCB_CHIP_REGS_SOFT_RST);
+	/* ################## end #################### */
 
-        do_kernel_restart(command);
+    do_kernel_restart(command);
 
 #if defined(CONFIG_VTSS_VCOREIII_SERVAL1_CLASSIC)
 #define CORE_RST_PROTECT VTSS_F_ICPU_CFG_CPU_SYSTEM_CTRL_RESET_CORE_RST_PROTECT

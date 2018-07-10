@@ -6,9 +6,9 @@
 #########################################################################
 #!/bin/bash
 
-cp config-servalt .config
+cp config-ocelot .config
 
 make ARCH=mips CROSS_COMPILE=/opt/mscc/mscc-brsdk-mips-2017.02-017/stage1/x86_64-linux/usr/bin/mipsel-linux- menuconfig
 
-cp .config config-servalt
+cp .config config-ocelot
 

@@ -7,7 +7,7 @@
 #!/bin/bash
 
 export ARCH=mips 
-export PATH=/home/work/share/mscc-brsdk-source-2017.02-017/mscc-brsdk-mips-2017.02-017/stage1/x86_64-linux/usr/bin:$PATH
+export PATH=/opt/mscc/mscc-brsdk-mips-2017.02-017/stage1/x86_64-linux/usr/bin:$PATH
 export CROSS_COMPILE=mipsel-linux-
 #export INSTALL_MOD_PATH="./ccache /usr/bin/gcc"
 #export O=vmlinux.bin

@@ -139,11 +139,12 @@ static struct platform_device *target_devices[] __initdata = {
     &vc3fdma_device,
     &i2c_device,
 };
-
+/* delet by lihz - 2019.2.18 */
+#if 0 
 static struct i2c_board_info i2c_devs[] __initdata = {
     { I2C_BOARD_INFO("sfp", 0x50),  }, /* I2C SFP */
 };
-
+#endif
 static int __init target_device_init(void)
 {
     int res;
@@ -159,9 +160,10 @@ static int __init target_device_init(void)
 #error Unknown platform
 #endif
 #endif
-
+	/* delet by lihz - 2019.2.18 */
+#if 0 
     i2c_register_board_info(0, i2c_devs, ARRAY_SIZE(i2c_devs));
-
+#endif
     res = platform_add_devices(target_devices, ARRAY_SIZE(target_devices));
     if (res == 0 && vcoreiii_memmap_start && vcoreiii_memmap_size) {
         firmware_resources[0].start = vcoreiii_memmap_start;

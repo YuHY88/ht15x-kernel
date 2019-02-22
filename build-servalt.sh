@@ -18,6 +18,7 @@ make vmlinux.bin
 
 cp ./arch/mips/boot/vmlinux.bin ./mscc-linux-servalt.bin
 
+export LD_LIBRARY_PATH=/opt/mscc/mscc-brsdk-mips-2017.02-017/stage1/x86_64-linux/usr/lib
 xz --force --check=none --lzma2=preset=6e,dict=64KiB mscc-linux-servalt.bin
 
 

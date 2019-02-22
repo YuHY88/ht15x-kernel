@@ -11,7 +11,8 @@ CC=$5
 #myver=v001r003 # change vtss.ifh mtu;spi controller use SIMC, not to used norflash
 #myver=v001r004 # change nandflash drvier as mx35, 
 #myver=v001r005 # modify nandflash ecc strlenth; add reset switch core when reset cpu core;
-myver=v001r007 # code forom v001r006 change to v001r005, set version is v001r007
+#myver=v001r007 # code forom v001r006 change to v001r005, set version is v001r007
+myver=v001r008 # add i2c drvier to kernel
 
 vecho() { [ "${quiet}" = "silent_" ] || echo "$@" ; }
 

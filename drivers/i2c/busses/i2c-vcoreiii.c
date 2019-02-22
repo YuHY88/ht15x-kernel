@@ -546,13 +546,15 @@ static int i2c_vcoreiii_probe(struct platform_device *pdev)
     vcoreiii_gpio_set_alternate(6, 1); /* TWI_SDA */
 #elif defined(CONFIG_VTSS_VCOREIII_SERVALT)
     vcoreiii_gpio_set_alternate(24, 1); /* TWI_SDA */
-    vcoreiii_gpio_set_alternate(25, 1); /* TWI_SCL */
+    //vcoreiii_gpio_set_alternate(25, 1); /* TWI_SCL */
+	vcoreiii_gpio_set_mode(13, VCOREIII_GPIO_MODE_ALT3);
+	vcoreiii_gpio_set_value(13, 1);
 #elif defined(CONFIG_VTSS_VCOREIII_JAGUAR2_FAMILY)
     vcoreiii_gpio_set_alternate(14, 1); /* TWI_SCL */
     vcoreiii_gpio_set_alternate(15, 1); /* TWI_SDA */
 #elif defined(CONFIG_VTSS_VCOREIII_SERVAL1)
-    vcoreiii_gpio_set_alternate(11, 1); /* TWI_SCL */
-    vcoreiii_gpio_set_alternate(7, 1); /* TWI_SDA */
+    vcoreiii_gpio_set_alternate(17, 1); /* TWI_SCL */
+    vcoreiii_gpio_set_alternate(16, 1); /* TWI_SDA */
 #else
 #error Unsupported platform!
 #endif
